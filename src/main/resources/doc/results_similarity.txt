@@ -1,0 +1,64 @@
+Cosine Similarity
+-----------------
+
+Sim=0.1250 rel=1 rank=2 qid=1
+Sim=0.0714 rel=1 rank=1 qid=2
+Sim=0.1250 rel=1 rank=2 qid=3
+2
+1
+2
+ (MRR) Mean Reciprocal Rank ::0.6666666666666666
+Total time taken: 0.791
+
+
+
+Dice Coefficient
+----------------
+
+Sim=0.7500 rel=1 rank=2 qid=1
+Sim=0.7692 rel=1 rank=3 qid=2
+Sim=0.7500 rel=1 rank=1 qid=3
+2
+3
+1
+ (MRR) Mean Reciprocal Rank ::0.611111111111111
+Total time taken: 0.793
+
+
+
+Jaccard Similarity
+------------------
+
+Sim=0.3333 rel=1 rank=1 qid=1
+Sim=0.3000 rel=1 rank=1 qid=2
+Sim=0.3333 rel=1 rank=2 qid=3
+1
+1
+2
+ (MRR) Mean Reciprocal Rank ::0.8333333333333334
+Total time taken: 0.809
+
+
+
+Inverse Manhattan distance
+--------------------------
+
+Sim=0.5000 rel=1 rank=2 qid=1
+Sim=0.3333 rel=1 rank=1 qid=2
+Sim=0.5000 rel=1 rank=1 qid=3
+2
+1
+1
+ (MRR) Mean Reciprocal Rank ::0.8333333333333334
+Total time taken: 0.835
+
+
+
+Comments
+--------
+- implement a CAS consumer for each similarity metric
+- implement ngrams instead of tokens
+- implement stemming
+
+
+
