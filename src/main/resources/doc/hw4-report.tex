@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\title{Homework 4 \\ Engineering and Error Analysis with UIMA}
+\author{Fernando Aguilar - 114297}
+\date{April 24th, 2014}
+
+%\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+In this homework, an information retrieval system was developed, and a very brief error analysis was done. We used three similarity metrics in order to enhance the mean reciprocal rank (MRR).
+\section{Design}
+The information retrieval system has several processing phases (pipeline steps). Each phase is implemented in a UIMA analysis engine. The phases are described as follows:
+
+\subsection{Document Reader}
+This phase reads the data file provided for the homework. It reads each line of the data file and creates a CAS in order to process it in the following pipeline phases.
+
+\subsection{Vector Annotator}
+In this step, the component extract the text tokens in order to generate the term-frequency vector of the Sentence. Before generating the vectors, some preprocessing techniques are applied to the text:
+\begin{itemize}
+\item Strip and Trip white spaces
+\item Lowercase
+\item Remove stopwords
+\item Stemming
+\end{itemize} 
+
+\subsection{Retrieval Evaluator}
+This is the final phase, in which the MRR  is calculated for each similarity metric proposed: 
+\begin{itemize}
+\item{ \textbf{Cosine similarity} : Given two term frequency vectors U and V, the cosine similarity is defined as:
+\begin{equation}
+sim_{cos} = \frac{ \| U \cdot V \| }{ \| U \| \| V \| }
+\end{equation}
+}
+\item{ \textbf{Jaccard distance}: Given two sets of terms (words) A and B, the Jaccard distance is defined as: 
+\begin{equation}
+sim_{jac} = \frac{ \| A \cap B \| }{ \| A \cup B \| }
+\end{equation}
+}
+\item{ \textbf{Dice coefficient}: Given two sets of tems (words) A and B, the Dice coefficient is defined as:
+\begin{equation}
+sim_{dice} = \frac{ 2 \| A \cap B \| }{ \|A\| + \|B\|  }
+\end{equation}
+}
+\item{ \textbf{Inverse Manhattan distance}: Given two term frequency vectors U and V, the inverse Manhattan (taxicab) distance is defined as:
+\begin{equation}
+sim_{Manh} = \frac{1}{ \sum_{t \in C} | F(t, U) - F(t, V) | + \sum_{t}^{T(U) \setminus C} F(t,U) + \sum_{t}^{T(V) \setminus C } F(t,V)  }
+\end{equation}
+Where $C$ is the set of common terms between $U$ and $V$, $T(X)$ is the set of terms of a term frequency vector $X$ and $F(t,X)$ is the frequency of the term $t$ in the term frequency vector $X$.
+}
+
+\end{itemize}
+
+\section{Error analysis}
+In the following text, we will show the MRR using different similarity metrics described above:
+\begin{verbatim}
+Cosine Similarity
+-----------------
+ (MRR) Mean Reciprocal Rank ::0.6666666666666666
+Total time taken: 0.791
+
+Dice Coefficient
+----------------
+ (MRR) Mean Reciprocal Rank ::0.611111111111111
+Total time taken: 0.793
+
+Jaccard Similarity
+------------------
+ (MRR) Mean Reciprocal Rank ::0.8333333333333334
+Total time taken: 0.809
+
+Inverse Manhattan distance
+--------------------------
+ (MRR) Mean Reciprocal Rank ::0.8333333333333334
+Total time taken: 0.835
+\end{verbatim}
+
+Assuming that the three retrievals with theirs documents are the only corpora used to evaluate the systems, we see that Dice coefficient is the similarity metric with the least MRR, while the Jaccard and Inverse Manhattan distance show the highest MRR. A possible explanation is that Inverse Manhattan integrate information about frequency and common terms. Unlike other metrics, the Jaccard similarity is well proven metric for bag-of-word models.
+
+
+
+\end{document}

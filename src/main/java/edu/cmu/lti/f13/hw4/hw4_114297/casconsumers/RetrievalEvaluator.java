@@ -248,8 +248,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	 * @param relList Relevance List
 	 * @return
 	 */
-	private int getRank(ArrayList<Pair<Integer, Double>> simiList, ArrayList<Integer> relList)
-	{
+	private int getRank(ArrayList<Pair<Integer, Double>> simiList, ArrayList<Integer> relList) {
 		//sort by cos score, desc
 		Collections.sort(simiList, simiList.get(0).getComparatorT2Inverted());
 		//add the rank
@@ -276,5 +275,5 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		for(Token t: tokens)
 			ret.put(t.getText(), t.getFrequency());
 		return ret;
-	}	
+	}
 }
